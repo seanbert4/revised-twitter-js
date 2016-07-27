@@ -17,7 +17,20 @@ function find (properties) {
   return _.cloneDeep(_.filter(data, properties));
 }
 
-module.exports = { add: add, list: list, find: find };
+function update (tweetId, newText) {
+  if (!data[tweetId]) return null;
+  data[tweetId].text = newText;
+  return data[tweetId];
+};
+
+function remove(tweetId) {
+  var tweetToRemove = find({id: Number(tweetId)})[0];
+  if (!tweetToRemove) return 'Tweet not found';
+  _.remove(data, tweetToRemove);
+  return 'Tweet deleted';
+}
+
+module.exports = { add: add, list: list, find: find, update: update, remove: remove};
 
 var randArrayEl = function(arr) {
   return arr[Math.floor(Math.random() * arr.length)];

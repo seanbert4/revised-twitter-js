@@ -21,21 +21,31 @@
           <input type="submit" value="Submit" />
         </form>
       {% endif %}
+      {% if showEditForm %}
+        <form>
+          <label for="name_field">Name:</label> {{tweetToEdit.name}}
+
+          <label for="text_field">Text:</label>
+          <input name="text" type="text" id="edit_text_field" value="{{ tweetToEdit.text }}"/>
+
+          <button id="submitEditBtn" type="button" data-tweet-id="{{ tweetToEdit.id }}">Submit edit</button>
+        </form>
+      {% endif %}
     </div>
     <div class="col-md-9">
 
       <!-- display tweets here -->
       <div id="tweets">
       {% for tweet in tweets %}
-        <div class="tweetbox">
+        <div class="tweetbox" id="tweet{{tweet.id}}">
           <img src={{tweet.profilePicUrl}}>
           <div class="content">
             <p class="by"><a href="/users/{{tweet.name}}">{{tweet.name}}</a></p>
             <p><a href="/tweets/{{tweet.id}}">{{tweet.text}}</a></p>
           </div>
           <span>
-            <button type="button" id="editbtn">Edit</button>
-            <button type="button" data-tweet-id={{tweet.id}} id="deletebtn">Delete</button>
+            <a href="/tweets/{{tweet.id}}/edit"><button type="button">Edit</button></a>
+            <button type="button" data-tweet-id={{tweet.id}} class="deletebtn">Delete</button>
           </span>
         </div>
       {% endfor %}

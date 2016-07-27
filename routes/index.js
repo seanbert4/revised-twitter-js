@@ -46,5 +46,31 @@ module.exports = function makeRouterWithSockets (io) {
     res.redirect('/');
   });
 
+    // navigates user to the single-tweet edit page
+  router.get('/tweets/:id/edit', function(req, res, next){
+    var tweetToEdit = tweetBank.find({ id: Number(req.params.id)})[0];
+    res.render('index', {
+      title: 'Twitter.js',
+      tweets: [], //Hacky way to say: don't show any tweets!
+      showEditForm: true,
+      tweetToEdit: tweetToEdit
+    });
+  });
+
+    // navigates user to the single-tweet edit page
+  router.put('/tweets/:id', function(req, res, next){
+    var editedTweet = tweetBank.update(req.params.id, req.body.text);
+    res.json(editedTweet);
+  });
+
+    // deletes a tweet
+  router.delete('/tweets/:id', function(req, res, next){
+    var removeResult = tweetBank.remove(req.params.id);
+    if (removeResult === 'Tweet deleted') {
+      res.status(201).send();
+      io.sockets.emit('tweet_deleted', {tweetId: req.params.id});
+    }
+  });
+
   return router;
 }
