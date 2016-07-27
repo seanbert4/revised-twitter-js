@@ -4,6 +4,16 @@
 
   <div class="page-header">
     <h1>Welcome to Twitter.js!</h1>
+<!--     <form id="search-bar">
+      <label for="name_field">Filter tweets by keyword:</label>
+      <input name="keyword" type="text" id="keyword_field" value=""/>
+      <button id="filterbtn" type="button">Filter tweets</button>
+    </form> -->
+    <form id="search-bar" action="/tweets" method="GET">
+      <label for="name_field">Filter tweets by tag:</label>
+      <input name="tag" type="text" value=""/>
+      <input type="submit" value="Submit"/>
+    </form>
   </div>
   <div class="row">
     <div class="col-md-3">

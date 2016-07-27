@@ -61,3 +61,11 @@ code {
 .content .by {
   font-weight: bold;
 }
+
+.page-header {
+  height: 79px;
+}
+
+#search-bar {
+  float: right;
+}

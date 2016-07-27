@@ -42,6 +42,10 @@ var getFakeName = function() {
   return randArrayEl(fakeFirsts) + " " + randArrayEl(fakeLasts);
 };
 
+var getFakeHashtag = function() {
+  var tags = ['#fullstacklove', '#codedreams', '#obsessed', '#gracehopperlove', '#expressisthebest', '#fullstackismyfriend', '#gracehopperismyfriend']
+};
+
 var getFakeTweet = function() {
   var awesome_adj = ['awesome', 'breathtaking', 'amazing', 'funny', 'sweet', 'cool', 'wonderful', 'mindblowing'];
   return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";

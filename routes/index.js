@@ -19,6 +19,10 @@ module.exports = function makeRouterWithSockets (io) {
   router.get('/', respondWithAllTweets);
   router.get('/tweets', respondWithAllTweets);
 
+  router.get('/filteredTweets', function(req, res, next) {
+    req.params
+  });
+
   // single-user page
   router.get('/users/:username', function(req, res, next){
     var tweetsForName = tweetBank.find({ name: req.params.username });
@@ -57,10 +61,11 @@ module.exports = function makeRouterWithSockets (io) {
     });
   });
 
-    // navigates user to the single-tweet edit page
+    // edits the tweet
   router.put('/tweets/:id', function(req, res, next){
     var editedTweet = tweetBank.update(req.params.id, req.body.text);
     res.json(editedTweet);
+    io.sockets.emit('tweet_edited', editedTweet);
   });
 
     // deletes a tweet
