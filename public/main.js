@@ -1,7 +1,7 @@
 'use strict';
 
 $('#filterbtn').click(function(evt) {
-  var $keyword = $('#search-bar')[0][0].value);
+  var $keyword = $('#search-bar')[0][0].value();
   $.get('/tweets?keyword=' + $keyword);
 });
 

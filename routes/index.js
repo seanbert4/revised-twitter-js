@@ -20,7 +20,12 @@ module.exports = function makeRouterWithSockets (io) {
   router.get('/tweets', respondWithAllTweets);
 
   router.get('/filteredTweets', function(req, res, next) {
-    req.params
+    var filteredTweets = tweetBank.find(req.query);
+    res.render('index', {
+      title: '#' + req.query.tag + ' Tweets',
+      tweets: filteredTweets,
+      showForm: true
+    });
   });
 
   // single-user page
@@ -52,12 +57,12 @@ module.exports = function makeRouterWithSockets (io) {
 
     // navigates user to the single-tweet edit page
   router.get('/tweets/:id/edit', function(req, res, next){
-    var tweetToEdit = tweetBank.find({ id: Number(req.params.id)})[0];
+    var tweets = tweetBank.find({ id: Number(req.params.id)});
     res.render('index', {
       title: 'Twitter.js',
-      tweets: [], //Hacky way to say: don't show any tweets!
+      tweets: tweets,
       showEditForm: true,
-      tweetToEdit: tweetToEdit
+      tweetToEdit: tweets[0]
     });
   });
 

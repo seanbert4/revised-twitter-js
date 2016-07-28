@@ -2,10 +2,12 @@
 
 var _ = require('lodash');
 var data = [];
+var id = 0;
 
 function add (name, text) {
   var profilePicUrl = getProfilePicUrl(name);
-  data.push({ name: name, profilePicUrl: profilePicUrl, text: text, id: data.length });
+  var tag = text.split("#")[1];
+  data.push({ name: name, profilePicUrl: profilePicUrl, text: text, tag: tag, id: id++ });
   return _.clone(data[data.length - 1]);
 }
 
@@ -42,13 +44,23 @@ var getFakeName = function() {
   return randArrayEl(fakeFirsts) + " " + randArrayEl(fakeLasts);
 };
 
-var getFakeHashtag = function() {
-  var tags = ['#fullstacklove', '#codedreams', '#obsessed', '#gracehopperlove', '#expressisthebest', '#fullstackismyfriend', '#gracehopperismyfriend']
-};
-
 var getFakeTweet = function() {
   var awesome_adj = ['awesome', 'breathtaking', 'amazing', 'funny', 'sweet', 'cool', 'wonderful', 'mindblowing'];
-  return "Fullstack Academy is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". #fullstacklove #codedreams";
+  var campuses = ['Fullstack Academy', 'Grace Hopper Academy'];
+  var tags = ['#fullstacklove',
+              '#codedreams',
+              '#obsessed',
+              '#strongfeels',
+              '#gracehopperlove',
+              '#codeisbae',
+              '#fullstackismyfriend',
+              '#gracehopperismyfriend',
+              '#cleancode',
+              '#staffarecodeninjas',
+              '#feelthebson',
+              '#makeJSgreatagain',
+              '#testfirsttalklater'];
+  return randArrayEl(campuses)+ " is " + randArrayEl(awesome_adj) + "! The instructors are just so " + randArrayEl(awesome_adj) + ". " + randArrayEl(tags);
 };
 
 //Receives a string and hashes it to a number between 1 and 99
