@@ -9,7 +9,6 @@ module.exports = function makeRouterWithSockets (io) {
   function respondWithAllTweets (req, res, next){
     var allTheTweets = tweetBank.list();
     res.render('index', {
-      title: 'Twitter.js',
       tweets: allTheTweets,
       showForm: true
     });
@@ -22,7 +21,6 @@ module.exports = function makeRouterWithSockets (io) {
   router.get('/filteredTweets', function(req, res, next) {
     var filteredTweets = tweetBank.find(req.query);
     res.render('index', {
-      title: '#' + req.query.tag + ' Tweets',
       tweets: filteredTweets,
       showForm: true
     });
@@ -32,7 +30,6 @@ module.exports = function makeRouterWithSockets (io) {
   router.get('/users/:username', function(req, res, next){
     var tweetsForName = tweetBank.find({ name: req.params.username });
     res.render('index', {
-      title: 'Twitter.js',
       tweets: tweetsForName,
       showForm: true,
       username: req.params.username
@@ -43,7 +40,6 @@ module.exports = function makeRouterWithSockets (io) {
   router.get('/tweets/:id', function(req, res, next){
     var tweetsWithThatId = tweetBank.find({ id: Number(req.params.id) });
     res.render('index', {
-      title: 'Twitter.js',
       tweets: tweetsWithThatId // an array of only one element ;-)
     });
   });
@@ -59,7 +55,6 @@ module.exports = function makeRouterWithSockets (io) {
   router.get('/tweets/:id/edit', function(req, res, next){
     var tweets = tweetBank.find({ id: Number(req.params.id)});
     res.render('index', {
-      title: 'Twitter.js',
       tweets: tweets,
       showEditForm: true,
       tweetToEdit: tweets[0]
